@@ -139,8 +139,8 @@ environments:
             #url: "jdbc:postgresql://104.207.157.132:5432/nod"
             url: "jdbc:postgresql://localhost:5432/nod"
             username: "postgres"
-            #password: "gr33nfield" 
-            password: "postgres" 
+            password: "gr33nfield" 
+            #password: "postgres" 
             properties:
                 jmxEnabled: true
                 initialSize: 5

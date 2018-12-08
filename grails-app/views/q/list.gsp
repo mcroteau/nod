@@ -65,32 +65,32 @@
 			var $ipAddresses = $('.ipAddress')
 			var ipMap = {}
 			
-			$($ipAddresses).each(function(){
-				var $row = $(this)
-				var ipAddress = $row.html()
-				var id = $row.attr("id")
-				console.log(id)
-				if(!ipMap.hasOwnProperty(ipAddress)){
-					console.log(ipAddress)
-					ipMap[ipAddress] = {}
-					ipMap[ipAddress]["id"] = id + "-origin"
+			function initialize(){
+				$($ipAddresses).each(function(){
+					var $row = $(this)
+					var ipAddress = $row.html()
+					var id = $row.attr("id")
+					
+					if(!ipMap.hasOwnProperty(ipAddress)){
+						console.log(ipAddress)
+						ipMap[ipAddress] = {}
+						ipMap[ipAddress]["id"] = id + "-origin"
+					}
+					
+					return ""
+					
+				});
+				
+				for(var ip in ipMap){
+					var id = ipMap[ip].id
+					//getOrigin(ip).then(renderOrigin)
+					getOrigin(ip).then(renderOrigin(id))
 				}
-				
-				console.log(ipMap)
-				return ""
-				
-			});
-			
-			for(var ip in ipMap){
-				console.log(ip)
-				var id = ipMap[ip].id
-				//getOrigin(ip).then(renderOrigin)
-				getOrigin(ip).then(renderOrigin(id))
 			}
-
+			
+			
 			function getOrigin(ipAddress){
 				var url = baseUrl + ipAddress + accessKey
-				console.log(url)
 				return $.ajax({
 					url : url,
 					type : 'get',
@@ -98,7 +98,7 @@
 					dataType : 'jsonp',
 					contentType : 'application/json',
 					error : function(){
-						console.log("errored...")
+						//console.log("errored...")
 					}
 				})
 			}
@@ -106,14 +106,14 @@
 
 			function renderOrigin(id){
 				return function(data, response){
-					console.log(data, response)
+					//console.log(data, response)
 					var $origin = $("#" + id);
-					console.log(id)
 					var html = data.city + "<br/>" + data.country_name
-					console.log(html)
 					$origin.html(html)
 				}
 			}
+			
+			initialize()
 		})
 		</script>
 	</body>

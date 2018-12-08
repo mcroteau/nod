@@ -9,36 +9,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
 
-    <asset:stylesheet src="application.css"/>
-
+	<link rel="stylesheet" href="https://cdn.concisecss.com/concise.min.css">
+	<style type="text/css">
+		body{
+			padding:10px;
+		}
+		html, body, th,
+		td{
+			font-size:0.9em;
+			line-height:1.2em !important;
+		}
+		button, input[type=submit]{
+			font-size:0.9em !important;
+			line-height:1.2em !important;
+			padding:10px 15px !important;
+			
+		}
+		table{
+			min-width:0px;
+		}
+		th{
+			line-height:1.2 !important;
+		}
+	</style>
+		
     <g:layoutHead/>
 </head>
 <body>
-
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/#">
-		    <asset:image src="grails.svg" alt="Grails Logo"/>
-                </a>
-            </div>
-            <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
-                <ul class="nav navbar-nav navbar-right">
-                    <g:pageProperty name="page.nav" />
-                </ul>
-            </div>
-        </div>
-    </div>
+	
+	<g:link controller="q" action="nods">Nods</g:link>
+	<g:link controller="q" action="triage">Triage</g:link>
+	
 
     <g:layoutBody/>
 
-    <div class="footer" role="contentinfo"></div>
 
     <div id="spinner" class="spinner" style="display:none;">
         <g:message code="spinner.alt" default="Loading&hellip;"/>

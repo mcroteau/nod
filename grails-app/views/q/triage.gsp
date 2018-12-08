@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="admin">
+		<meta name="layout" content="main">
 		<title>Nod</title>
 		<link rel="stylesheet" href="https://cdn.concisecss.com/concise.min.css">
 	</head>
@@ -41,12 +41,17 @@
 						<g:each in="${triageInstances}" var="triageInstance">
 							<tr>
 								<td>${triageInstance.id}</td>
-								<td>${triageInstance.dateCreated}</td>
+								<td><g:formatDate format="MMM dd hh:mm" date="${triageInstance.dateCreated}"/></td>
 								<td>${triageInstance.path}</td>
 								<td>${triageInstance.error}</td>
 								<td>${triageInstance.ipAddress}</td>
 								<td>${triageInstance.email}</td>
-								<td></td>
+								<td>
+									<g:form action="delete" method="post" id="${triageInstance.id}">
+										<g:actionSubmit value="Delete"
+                onclick="return confirm('Are you sure???')"/>
+									</g:form>
+								</td>
 							</tr>
 						</g:each>
 					</tbody>
@@ -55,7 +60,7 @@
 				<g:paginate total="${triageInstancesTotal}"/>
 			</g:if>
 			<g:else>
-				<p>No Triages found..</p>
+				<p>No Triages found...</p>
 			</g:else>
 		</div>	
 

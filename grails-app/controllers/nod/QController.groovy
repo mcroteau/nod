@@ -8,7 +8,7 @@ class QController {
 		runningInstance.ipAddress = request.getRemoteHost()
 		runningInstance.save(flush:true)
 		
-		return [ o: "Thank you for trying Greenfield" ] as JSON
+		return [ m: "Thank you for trying Greenfield" ] as JSON
 	}
 	
 	
@@ -25,12 +25,11 @@ class QController {
 	
 	
 	def t(){
-		println "here..."
 		def triageInstance = new Triage()
 		triageInstance.ipAddress = request.getRemoteHost()
 		triageInstance.path = params.uri
 		triageInstance.error = params.q
-		triageInstance.email = params.email
+		triageInstance.email = params.m
 		
 		println triageInstance.error
 		
@@ -48,6 +47,17 @@ class QController {
 		def triageInstances = Triage.list(max: max, offset: offset, sort: sort, order: order)
 		
 		[triageInstances: triageInstances, triageInstancesTotal: Triage.count()]
+	}
+	
+	
+	def delete(Long id){
+		println "delete triage..."
+		if(params.id){
+			def triage = Triage.get(params.id)
+			triage.delete(flush:true)
+			flash.message = "Removed Triage..."
+		}
+		redirect(action:"triage")
 	}
 	
 }

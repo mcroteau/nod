@@ -7,7 +7,7 @@ class RunningInstance {
 	Date lastUpdated
 
 	static constraints = {
-		ipaddress(nullable:true)
+		ipAddress(nullable:true)
 		id generator: 'sequence', params:[sequence:'ID_RUNNING_INSTANCE_PK_SEQ']
     }
 }

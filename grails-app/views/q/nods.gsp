@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="admin">
+		<meta name="layout" content="main">
 		<title>Nod</title>
 		<link rel="stylesheet" href="https://cdn.concisecss.com/concise.min.css">
 	</head>
@@ -38,7 +38,7 @@
 						<g:each in="${runningInstances}" var="runningInstance">
 							<tr>
 								<td>${runningInstance.id}</td>
-								<td>${runningInstance.dateCreated}</td>
+								<td><g:formatDate format="MMM dd hh:mm" date="${runningInstance.dateCreated}"/></td>
 								<td><span class="ipAddress" id="ip-${runningInstance.id}">${runningInstance.ipAddress}</span></td>
 								<td><span id="ip-${runningInstance.id}-origin"></span></td>
 							</tr>
@@ -49,7 +49,7 @@
 				<g:paginate total="${runningInstancesTotal}"/>
 			</g:if>
 			<g:else>
-				<p>No Running Instances found..</p>
+				<p>No Running Instances found...</p>
 			</g:else>
 		</div>	
 

@@ -5,14 +5,14 @@ class QController {
 	
 	def o(){
 		def runningInstance = new RunningInstance()
-		runningInstance.ipaddress = request.getRemoteHost()
+		runningInstance.ipAddress = request.getRemoteHost()
 		runningInstance.save(flush:true)
 		
 		return [ o: "Thank you for trying Greenfield" ] as JSON
 	}
 	
 	
-	def list(){
+	def instances(){
 		def max = 10
 		def offset = params?.offset ? params.offset : 0
 		def sort = params?.sort ? params.sort : "id"
@@ -21,6 +21,32 @@ class QController {
 		def runningInstances = RunningInstance.list(max: max, offset: offset, sort: sort, order: order)
 		
 		[runningInstances: runningInstances, runningInstancesTotal: RunningInstance.count()]
+	}
+	
+	
+	def t(){
+		println "here..."
+		def triageInstance = new Triage()
+		triageInstance.ipAddress = request.getRemoteHost()
+		triageInstance.path = params.uri
+		triageInstance.error = params.q
+		
+		println triageInstance.error
+		
+		triageInstance.save(flush:true)
+		return [:] as JSON
+	}
+	
+	
+	def triage(){		
+		def max = 10
+		def offset = params?.offset ? params.offset : 0
+		def sort = params?.sort ? params.sort : "id"
+		def order = params?.order ? params.order : "desc"
+		
+		def triageInstances = Triage.list(max: max, offset: offset, sort: sort, order: order)
+		
+		[triageInstances: triageInstances, triageInstancesTotal: Triage.count()]
 	}
 	
 }

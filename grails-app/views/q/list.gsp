@@ -29,7 +29,7 @@
 						<tr>
 							<g:sortableColumn property="id" title="Id"/>
 							<g:sortableColumn property="dateCreated" title="Date"/>
-							<g:sortableColumn property="ipaddress" title="IP Address" params="${[admin:admin]}"/>
+							<g:sortableColumn property="ipAddress" title="IP Address" params="${[admin:admin]}"/>
 							<th>Country/State/Zip</th>
 						</tr>
 					</thead>
@@ -38,7 +38,7 @@
 							<tr>
 								<td>${runningInstance.id}</td>
 								<td>${runningInstance.dateCreated}</td>
-								<td><span class="ipAddress" id="ip-${runningInstance.id}">${runningInstance.ipaddress}</span></td>
+								<td><span class="ipAddress" id="ip-${runningInstance.id}">${runningInstance.ipAddress}</span></td>
 								<td><span id="ip-${runningInstance.id}-origin"></span></td>
 							</tr>
 						</g:each>

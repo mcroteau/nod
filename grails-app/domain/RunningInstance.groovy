@@ -1,7 +1,7 @@
 
 class RunningInstance {
 	
-	String ipaddress
+	String ipAddress
 
 	Date dateCreated
 	Date lastUpdated

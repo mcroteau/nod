@@ -27,15 +27,19 @@
 				<table class="table" style="margin-top:0px !important; padding-top:0px">
 					<thead>
 						<tr>
+							<g:sortableColumn property="id" title="Id"/>
 							<g:sortableColumn property="dateCreated" title="Date"/>
 							<g:sortableColumn property="ipaddress" title="IP Address" params="${[admin:admin]}"/>
+							<th>Country/State/Zip</th>
 						</tr>
 					</thead>
 					<tbody>
 						<g:each in="${runningInstances}" var="runningInstance">
 							<tr>
+								<td>${runningInstance.id}</td>
 								<td>${runningInstance.dateCreated}</td>
-								<td>${runningInstance.ipaddress}</td>
+								<td><span class="ipAddress" id="ip-${runningInstance.id}">${runningInstance.ipaddress}</span></td>
+								<td><span id="ip-${runningInstance.id}-origin"></span></td>
 							</tr>
 						</g:each>
 					</tbody>
@@ -47,5 +51,70 @@
 				<p>No Running Instances found..</p>
 			</g:else>
 		</div>	
+
+		<script type="text/javascript" src="${resource(dir:'js/lib/jquery.min.js')}"></script>
+		
+		<script type="text/javascript">
+		$(document).ready(function(){
+			
+			var baseUrl = "http://api.ipstack.com/"
+			var accessKey = "?access_key=0f94e485f1874c3ab43d0081fb8d7b0a"
+			
+			//getOrigins().then(renderStates).then(setState(state));
+			
+			var $ipAddresses = $('.ipAddress')
+			var ipMap = {}
+			
+			$($ipAddresses).each(function(){
+				var $row = $(this)
+				var ipAddress = $row.html()
+				var id = $row.attr("id")
+				console.log(id)
+				if(!ipMap.hasOwnProperty(ipAddress)){
+					console.log(ipAddress)
+					ipMap[ipAddress] = {}
+					ipMap[ipAddress]["id"] = id + "-origin"
+				}
+				
+				console.log(ipMap)
+				return ""
+				
+			});
+			
+			for(var ip in ipMap){
+				console.log(ip)
+				var id = ipMap[ip].id
+				//getOrigin(ip).then(renderOrigin)
+				getOrigin(ip).then(renderOrigin(id))
+			}
+
+			function getOrigin(ipAddress){
+				var url = baseUrl + ipAddress + accessKey
+				console.log(url)
+				return $.ajax({
+					url : url,
+					type : 'get',
+    				crossDomain: true,
+					dataType : 'jsonp',
+					contentType : 'application/json',
+					error : function(){
+						console.log("errored...")
+					}
+				})
+			}
+	
+
+			function renderOrigin(id){
+				return function(data, response){
+					console.log(data, response)
+					var $origin = $("#" + id);
+					console.log(id)
+					var html = data.city + "<br/>" + data.country_name
+					console.log(html)
+					$origin.html(html)
+				}
+			}
+		})
+		</script>
 	</body>
 </html>

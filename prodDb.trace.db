@@ -1,0 +1,3 @@
+2018-12-07 13:09:22 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLException: Table "RUNNING_INSTANCE" not found; SQL statement:
+insert into running_instance (id, version, date_created, ipaddress, last_updated) values (null, ?, ?, ?, ?) [42102-197]

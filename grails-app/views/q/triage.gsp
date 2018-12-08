@@ -5,6 +5,7 @@
 	<head>
 		<meta name="layout" content="admin">
 		<title>Nod</title>
+		<link rel="stylesheet" href="https://cdn.concisecss.com/concise.min.css">
 	</head>
 	<body>
 
@@ -31,6 +32,8 @@
 							<g:sortableColumn property="dateCreated" title="Date"/>
 							<g:sortableColumn property="path" title="Path"/>
 							<g:sortableColumn property="error" title="Issue"/>
+							<g:sortableColumn property="ipAddress" title="Ip Adress"/>
+							<g:sortableColumn property="email" title="Email"/>
 							<th></th>
 						</tr>
 					</thead>

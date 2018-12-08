@@ -5,6 +5,7 @@
 	<head>
 		<meta name="layout" content="admin">
 		<title>Nod</title>
+		<link rel="stylesheet" href="https://cdn.concisecss.com/concise.min.css">
 	</head>
 	<body>
 

@@ -12,7 +12,7 @@ class QController {
 	}
 	
 	
-	def instances(){
+	def nods(){
 		def max = 10
 		def offset = params?.offset ? params.offset : 0
 		def sort = params?.sort ? params.sort : "id"
@@ -30,6 +30,7 @@ class QController {
 		triageInstance.ipAddress = request.getRemoteHost()
 		triageInstance.path = params.uri
 		triageInstance.error = params.q
+		triageInstance.email = params.email
 		
 		println triageInstance.error
 		

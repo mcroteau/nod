@@ -1,3 +1,4 @@
+package nod
 
 class Triage {
 

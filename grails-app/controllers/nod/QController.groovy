@@ -1,5 +1,9 @@
+package nod
 
 import grails.converters.*
+
+import nod.Triage
+import nod.RunningInstance
 
 class QController {
 	
@@ -38,6 +42,7 @@ class QController {
 	}
 	
 	
+	
 	def triage(){		
 		def max = 10
 		def offset = params?.offset ? params.offset : 0
@@ -59,5 +64,16 @@ class QController {
 		}
 		redirect(action:"triage")
 	}
+	
+	
+	/**
+		end point to save stats
+	*/
+	def a(){
+		println request
+		println params
+		render [:] as JSON
+	}
+	
 	
 }

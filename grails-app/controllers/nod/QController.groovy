@@ -4,13 +4,14 @@ import grails.converters.*
 
 import nod.Triage
 import nod.RunningInstance
+import nod.PageAnalytic
+
 
 class QController {
 	
-
     static allowedMethods = [ a: "POST", delete: "POST", delete_nod: "POST"]
 	
-	def code = "2039481029431029843"
+	def secret = "2039481029431029843"
 	
 	def o(){
 		def runningInstance = new RunningInstance()
@@ -81,11 +82,9 @@ class QController {
 	}
 	
 	
-	/**
-		end point to save stats
-	*/
+
 	def a(){
-		if(code == params.c){
+		if(secret == params.c){
 			def pageAnalytic = new PageAnalytic()
 			pageAnalytic.page = params.page
 			pageAnalytic.duration = params.duration as Long

@@ -39,6 +39,7 @@
 	
 	<g:link controller="q" action="nods">Nods</g:link>
 	<g:link controller="q" action="triage">Triage</g:link>
+	<g:link controller="q" action="analytics">Analytics</g:link>
 	
 
     <g:layoutBody/>

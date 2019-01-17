@@ -10,6 +10,10 @@ class Triage {
 	Date dateCreated
 	Date lastUpdated
 	
+	static mapping = {
+		sort id: "desc"
+	}
+	
 	static constraints = {
 		path(nullable:false)
 		error(nullable:false)

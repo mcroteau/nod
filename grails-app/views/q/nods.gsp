@@ -41,6 +41,12 @@
 								<td><g:formatDate format="MMM dd hh:mm" date="${runningInstance.dateCreated}"/></td>
 								<td><span class="ipAddress" id="ip-${runningInstance.id}">${runningInstance.ipAddress}</span></td>
 								<td><span id="ip-${runningInstance.id}-origin"></span></td>
+								<td>
+									<g:form action="delete_nod" method="post" id="$runningInstance.id">
+										<input type="submit" value="Delete" name="delete_nod"
+				                			onclick="return confirm('Are you sure???')"/>
+									</g:form>
+								</td>
 							</tr>
 						</g:each>
 					</tbody>

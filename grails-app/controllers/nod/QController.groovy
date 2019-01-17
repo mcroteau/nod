@@ -7,6 +7,11 @@ import nod.RunningInstance
 
 class QController {
 	
+
+    static allowedMethods = [ a: "POST", delete: "POST", delete_nod: "POST"]
+	
+	def code = "2039481029431029843"
+	
 	def o(){
 		def runningInstance = new RunningInstance()
 		runningInstance.ipAddress = request.getRemoteHost()
@@ -66,14 +71,43 @@ class QController {
 	}
 	
 	
+	def delete_nod(Long id){
+		if(params.id){
+			def ri = RunningInstance.get(params.id)
+			ri.delete(flush:true)
+			flash.message = "Removed Nod/Running Instance..."
+		}
+		redirect(action:"nods")
+	}
+	
+	
 	/**
 		end point to save stats
 	*/
 	def a(){
-		println request
-		println params
+		if(code == params.c){
+			def pageAnalytic = new PageAnalytic()
+			pageAnalytic.page = params.page
+			pageAnalytic.duration = params.duration as Long
+			pageAnalytic.loadTime = params.loadTime as Long
+			pageAnalytic.ipAddress = request.getRemoteHost()
+			pageAnalytic.application = params.application
+			pageAnalytic.save(flush:true)
+		}
+		
 		render [:] as JSON
 	}
 	
+	
+	def analytics(){
+		def max = 10
+		def offset = params?.offset ? params.offset : 0
+		def sort = params?.sort ? params.sort : "id"
+		def order = params?.order ? params.order : "desc"
+		
+		def pageAnalytics = PageAnalytic.list(max: max, offset: offset, sort: sort, order: order)
+		
+		[pageAnalytics: pageAnalytics, pageAnalyticsTotal: PageAnalytic.count()]
+	}
 	
 }

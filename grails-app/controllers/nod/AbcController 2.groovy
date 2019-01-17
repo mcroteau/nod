@@ -7,16 +7,16 @@ import nod.RunningInstance
 import nod.PageAnalytic
 
 
-class QController {
+class AbcController {
 	
     static allowedMethods = [ a: "POST", delete: "POST", delete_nod: "POST"]
 	
 	def secret = "3aLe6zI0GW"
 	
-	
 	def index(){
 		redirect(action:"nods")
 	}
+	
 	
 	def o(){
 		def runningInstance = new RunningInstance()

@@ -49,9 +49,13 @@
 								<td>${pageAnalyticInstance.ipAddress}</td>
 								<td>${pageAnalyticInstance.application}</td>
 								<td>
-									<g:form action="delete" method="post" id="${pageAnalyticInstance.id}">
-										<g:actionSubmit value="Delete"
-                onclick="return confirm('Are you sure???')"/>
+									<g:form action="delete_analytic" method="post" id="${pageAnalyticInstance.id}">
+										<input type="submit" name="delete_analytic" value="Delete"
+                								onclick="return confirm('Are you sure???')"/>
+									</g:form>
+									<g:form action="delete_analytic_ip_address" method="post" id="${pageAnalyticInstance.id}">
+										<input type="submit" name="delete_analytic" value="Delete All w/${pageAnalyticInstance.ipAddress}"
+                								onclick="return confirm('Are you sure???')"/>
 									</g:form>
 								</td>
 							</tr>

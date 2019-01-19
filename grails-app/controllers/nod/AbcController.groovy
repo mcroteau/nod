@@ -91,16 +91,17 @@ class AbcController {
 	def a(){
 		if(secret == params.c){
 			def pageAnalytic = new PageAnalytic()
-			pageAnalytic.page = params.page
-			pageAnalytic.duration = params.duration as Long
-			pageAnalytic.loadTime = params.loadTime as Long
+			pageAnalytic.page = params.page ? params.page : "no page defined"
+			pageAnalytic.duration = params.duration ? params.duration as Long : 0
+			pageAnalytic.loadTime = params.loadTime ?  params.loadTime as Long : 0
 			pageAnalytic.ipAddress = request.getRemoteHost()
-			pageAnalytic.application = params.application
+			pageAnalytic.application = params.application ? params.application : "no application defined"
 			pageAnalytic.save(flush:true)
 		}
 		
 		render "Hello..."
 	}
+	
 	
 	
 	def analytics(){
@@ -113,5 +114,28 @@ class AbcController {
 		
 		[pageAnalytics: pageAnalytics, pageAnalyticsTotal: PageAnalytic.count()]
 	}
+	
+	
+	def delete_analytic(){
+		if(params.id){
+			def pa = PageAnalytic.get(params.id)
+			pa.delete(flush:true)
+			flash.message = "Removed Page Analytic..."
+		}
+		redirect(action:"analytics")
+	}
+	
+	
+	def delete_analytic_ip_address(){
+		if(params.id){
+			def pa = PageAnalytic.get(params.id)
+			def analytics = PageAnalytic.findAllByIpAddress(pa.ipAddress)
+			analytics.each { analytic ->
+				analytic.delete(flush:true)
+			}
+		}
+		redirect(action:"analytics")
+	}
+	
 	
 }

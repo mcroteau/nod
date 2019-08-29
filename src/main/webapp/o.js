@@ -14,7 +14,7 @@ $(document).ready(function(){
                 var duration = Date.now() - loaded
 
                 $.ajax({
-                        url: 'http://104.207.157.132:8080/nod/q/a',
+                        url: 'http://localhost:8080/nod/q/a',
                         type: "post",
                         data : {
                                 c: "3aLe6zI0GW",
@@ -25,10 +25,11 @@ $(document).ready(function(){
                                 duration: duration,
                                 link : link
                         },
-                        error : function(a, o){
-                                console.log(a, o)
+                        error : function(d, o){
+                                console.log(d, o)
                         }
                 })
                 //return ""     
         });
 })
+
